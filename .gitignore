@@ -1,0 +1,6 @@
+.vscode/
+/bin/
+/build/
+*.log
+__pycache__/
+style/
