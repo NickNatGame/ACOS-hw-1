@@ -329,6 +329,7 @@ int run_simulation(const Parameters *parameters) {
   int result = 0;
   const char *reason = "все философы выполнили заданное число циклов";
 
+  /* на основе сида у нас будут разные числа */
   srand((unsigned int)parameters->seed);
   print_log("=== Обедающие философы: последовательная модель ===\n"
             "Философов/вилок: %d, циклов: %d, стратегия: fifo.\n"

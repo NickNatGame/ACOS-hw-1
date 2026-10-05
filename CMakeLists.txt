@@ -20,3 +20,18 @@ set_target_properties(philosophers PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
 
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(philosophers_tests tests/test_philosophers.c)
+    add_dependencies(philosophers_tests philosophers)
+    target_include_directories(philosophers_tests PRIVATE inc)
+    target_compile_definitions(philosophers_tests PRIVATE _POSIX_C_SOURCE=200809L)
+    target_compile_options(philosophers_tests PRIVATE -Wall -Wextra -Wpedantic)
+    set_target_properties(philosophers_tests PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    )
+    add_test(NAME philosophers_tests
+        COMMAND philosophers_tests $<TARGET_FILE:philosophers>
+    )
+    set_tests_properties(philosophers_tests PROPERTIES TIMEOUT 60)
+endif()
